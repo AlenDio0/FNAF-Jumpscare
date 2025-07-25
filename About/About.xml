@@ -1,9 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ModMetaData>
 	<packageId>AlenDio.FNAFJumpscare</packageId>
-	<name>FNAF Jumpscare</name>
+	<name>1/10000 Chance for Withered Foxy Jumpscare Every Second</name>
 	<author>AlenDio</author>
-	<description></description>
+	<description>Inspired by this terraria mod.
+Simply, a mod that every seconds checks for a 1/10000 chance to wake up Whitered Foxy and jumpscare you.</description>
 	<supportedVersions>
 		<li>1.6</li>
 	</supportedVersions>

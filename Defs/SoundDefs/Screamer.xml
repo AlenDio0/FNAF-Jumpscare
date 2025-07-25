@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+	<SoundDef>
+		<defName>FNAFScreamer</defName>
+		<context>Any</context>
+		<maxVoices>1</maxVoices>
+		<subSounds>
+			<li>
+				<onCamera>true</onCamera>
+				<grains>
+					<li Class="AudioGrain_Clip"><clipPath>screamer</clipPath></li>
+				</grains>
+				<volumeRange>
+					<min>100</min>
+					<max>150</max>
+				</volumeRange>
+				<repeatMode>NeverTwice</repeatMode>
+				<sustainLoop>false</sustainLoop>
+			</li>
+		</subSounds>
+	</SoundDef>
+</Defs>
