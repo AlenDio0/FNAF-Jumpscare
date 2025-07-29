@@ -1,35 +1,31 @@
 ﻿using UnityEngine;
 using Verse;
+using Verse.Sound;
 
 namespace FNAFJumpscare
 {
     class JumpscareComponent : GameComponent
     {
-        private float m_LastTime;
+        private float m_LastTime = Time.realtimeSinceStartup;
 
         private const float m_CheckDuration = 1f;
         private const int m_Chance = 10_000;
 
         public JumpscareComponent(Game game)
-            : base()
-        {
-            m_LastTime = Time.realtimeSinceStartup;
-        }
+            : base() { }
 
-        public override void GameComponentTick()
+        public override void GameComponentUpdate()
         {
-            base.GameComponentTick();
-
             float currentTime = Time.realtimeSinceStartup;
             if (currentTime - m_LastTime < m_CheckDuration)
                 return;
             m_LastTime = currentTime;
 
-            if (Random.Range(0, m_Chance + 1) != m_Chance)
+            if (Random.Range(1, m_Chance + 1) != m_Chance)
                 return;
 
-            Log.Warning("Bad luck, you woke up Whitered Foxy!");
-            LongEventHandler.QueueLongEvent(() => Find.WindowStack.Add(new JumpscareWindow()), "Jumpscare", false, null);
+            SoundDef.Named("FNAFScreamer")?.PlayOneShotOnCamera();
+            Find.WindowStack.Add(new JumpscareWindow());
         }
     }
 }
