@@ -8,23 +8,31 @@ namespace FNAFJumpscare
     {
         private float m_LastTime = Time.realtimeSinceStartup;
 
-        private const float m_CheckDuration = 1f;
-        private const int m_Chance = 10_000;
-
         public JumpscareComponent(Game game)
             : base() { }
 
         public override void GameComponentUpdate()
         {
+            if (Find.TickManager.Paused)
+                return;
+
+            var settings = FNAFJumpscareMod.s_Settings;
             float currentTime = Time.realtimeSinceStartup;
-            if (currentTime - m_LastTime < m_CheckDuration)
+            if (currentTime - m_LastTime < settings.CheckDuration)
                 return;
             m_LastTime = currentTime;
 
-            if (Random.Range(1, m_Chance + 1) != m_Chance)
+            if (Random.Range(1, settings.Chance + 1) != settings.Chance)
                 return;
 
-            SoundDef.Named("FNAFScreamer")?.PlayOneShotOnCamera();
+            SoundDef sound = SoundDef.Named("FNAFScreamer");
+            if (sound != null)
+            {
+                foreach (SubSoundDef subSound in sound.subSounds)
+                    subSound.volumeRange = new FloatRange(settings.Volume, settings.Volume);
+
+                sound.PlayOneShotOnCamera();
+            }
             Find.WindowStack.Add(new JumpscareWindow());
         }
     }
